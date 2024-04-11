@@ -9,7 +9,7 @@ H_tot = 2*H_tube + H_electrolyte;
 sigmas = [1e-3, 5e-3, 1e-2, 5e-2, 1e-1];
 ns = length(sigmas);
 % Models
-kinetics = ["BV"];%["BV", "CJ"];
+kinetics = ["BV"];
 mass = ["MS", "F"];
 % Axis limits
 Llim = [0, H_tot];
@@ -77,41 +77,5 @@ for i = 1:length(kinetics)
         title(tcl, "Molar fractions, central cut line", FontSize=fsize, Interpreter="latex");
         % Save plot
         exportgraphics(fig, model + " - Cut Line.pdf", BackgroundColor="none", ContentType="vector");
-    end
-end
-
-%% Old version using stackedplot, ignore
-
-% Iterate through models
-for i = 1:length(kinetics)
-    for j = 1:length(mass)
-        % Create figure and set colors
-        fig = figure(Position=[400,200,1000,500]);
-        % Define model
-        model = kinetics(i) + "-" + mass(j);
-        % Load concentration data
-        tab_H2 = sortrows(readtable(model + " - Cut Line H2.csv"));
-        tab_O2 = sortrows(readtable(model + " - Cut Line O2.csv"));
-        L = tab_H2{:,1}*1e6;
-        xH2 = tab_H2{:,2:end};
-        xO2 = tab_O2{:,2:end};
-        tab_x = table(L, xH2, xO2);
-        % Plot curves for i_0,ref,f
-        s = stackedplot(tab_x, "XVariable","L");
-        axesProps = struct(s.AxesProperties(2));  % using struct() is undocumented
-        axesProps.Axes.XLabel.Interpreter = 'tex';
-        s.XLimits = Llim;
-        s.XLabel = "Arc length [\mu m]";
-        s.Title = "Molar fractions, central cut line";
-        % Set H2 plot properties
-        %axesProps.LegendLabels_I.Interpreter = 'tex';
-        s.AxesProperties(1).LegendLabels = arrayfun(@(i) "H_2, i_{0,ref,f} = "+i+" [A/cm^2]", i0refs);%["H_2, i_{0,ref,f} = ", "b", "c"];
-        s.AxesProperties(1).YLimits = H2lim;
-        % Set O2 plot properties
-        % Legend
-        %legend(FontSize=8);
-        % Save plot
-        %ax = gca;
-        %exportgraphics(ax, model + " - Polarization.pdf", BackgroundColor="none");
     end
 end
