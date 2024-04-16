@@ -1,5 +1,5 @@
 # SOFC-H2-parameter-study
-COMSOL models for the study of the effects of reference exchange current density and electrode ionic conductivity on solid oxide fuel cell (SOFC) operation, as shown in our paper (soon to be published).
+COMSOL models for the study of the effects of reference exchange current density and electrode ionic conductivity on solid oxide fuel cell (SOFC) operation, as shown in our paper (DOI: 10.1016/j.jpowsour.2024.234493).
 
 <p align="center">
 <img src="https://github.com/green-ammonia-institute/SOFC-H2-parameter-study/blob/main/Images/BV-MS%20-%20xH2.png" width=50% height=50%>
